@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="tex">
+			<!-- v-text和v-html都会覆原本元素里面的内容 -->
+			<!-- v-cloak不会覆盖原本标签里面的内容 -->
+			<div v-cloak>
+				+++{{content}}+++
+			</div>
+			<div v-text="content">===</div>
+			<div v-html="content">===</div>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:"#tex",
+				data:{
+					content:"<p>hello world</p>"
+				}
+			})
+		</script>
+		<div id="meth">
+			<!-- v-on可用@代替 -->
+			<div v-on:click="change">
+				{{msg}}
+			</div>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:"#meth",
+				data:{
+					msg:"hello"
+				},
+				methods:{
+					change:function(){
+						this.msg="world"
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

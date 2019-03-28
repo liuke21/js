@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+  <!-- 引入路由模块 -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+  <div id="app">
+    <router-link to="/account">account</router-link>
+    <router-view></router-view>
+  </div>
+  <template id="accout">
+    <div>
+    <h1>这是account组件</h1>
+    <router-link to="/account/login">登录</router-link>
+    <router-link to="/account/register">注册</router-link>
+    <router-view></router-view>
+  </div>
+  </template>
+  <script type="text/javascript">
+    var account={
+      template:"#accout"
+    }
+    var login={
+      template:"<h3>登录</h3>"
+    }
+    var register={
+      template:"<h3>注册</h3>"
+    }
+    var router=new VueRouter({
+      routes:[
+      {path:'/',redirect:'/account'},
+      {path:'/account',
+      component:account,
+      children:[{path:'login',component:login},
+      {path:'register',component:register}]
+      }]
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+
+      },
+      router
+    })
+  </script>
+</body>
+</html>

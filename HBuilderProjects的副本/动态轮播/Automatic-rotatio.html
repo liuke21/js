@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0;
+			}
+			#wrap {
+				width: 800px;
+				height: 400px;
+				position: relative;
+			}
+			.list {
+				width: 800px;
+				height: 400px;
+				list-style: none;
+				position: relative;
+				padding-left:0px;
+				color: white;
+				margin: 0;
+			}
+			.item{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				opacity: 0;
+				transition: all .5s;
+			}
+			/* .item:nth-child(1){
+				background-color: #00FFFF;
+			}
+			.item:nth-child(2){
+				background-color: red;
+			}
+			.item:nth-child(3){
+				background-color: pink;
+			}
+			.item:nth-child(4){
+				background-color: gold;
+			}
+			.item:nth-child(5){
+				background-color: green;
+				} */
+			.btn {
+				height: 100px;
+				width:50px;
+				top:150px;
+				position: absolute;
+				z-index: 1000;
+				background-color:#F0F8FF;
+				outline: none;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			#goPre {
+				left:0px;
+			}
+			#goNext {
+				right:0px;
+			}
+			.item.active{
+				opacity: 1;
+				z-index: 10;
+			}   /* 对应的图片className="item active”，即显示出对应的照片 */
+			.pointlist {
+				padding-left: 0;
+				list-style: none;
+				position: absolute;
+				right: 20px;
+				bottom: 20px;
+				z-index: 1000;
+			}
+			.point {
+				width:10px;
+				height:10px;
+				border-radius: 100%;
+				float: left;
+				background-color: rgba(0,0,0,.4);
+				margin-right:12px;
+
+			}
+			.itemd{
+				opacity: 1;
+			}
+			.point.active {
+				background-color: rgba(255,255,255,.8);
+			/* } 对应的第index个点变为白色 */
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+				<ul class="list">
+				  <li class="item itemd"><img src="https://i8.mifile.cn/v1/a1/3de85dc4-9a36-17d0-2943-327308535733!720x360.webp" ></li>
+				  <li class="item"><img src="https://i8.mifile.cn/v1/a1/af921fca-4c8d-28a5-c0c5-8ed859f13994!720x360.webp" ></li>
+				  <li class="item"><img src="https://i8.mifile.cn/v1/a1/adb47513-e18c-2b23-c5f1-2487f4e55f33!720x360.webp" ></li>
+				  <li class="item"><img src="https:////i1.mifile.cn/a4/xmad_15487436335904_xLtUu.jpg" > </li>
+				  <li class="item"><img src="https://i1.mifile.cn/a4/xmad_15489220087388_KMgyE.jpg" ></li>
+				</ul>
+		<button type="button" class="btn" id="goPre"><</button>
+		<button type="button" class="btn" id="goNext">></button>
+	    <ul class="pointlist">
+			  <li class="point" data-index="0"></li>
+			  <li class="point" data-index="1"></li>
+			  <li class="point" data-index="2"></li>
+			  <li class="point" data-index="3"></li>
+			  <li class="point" data-index="4"></li>
+			  <!-- data-index添加对应的数值 -->
+			</ul>
+		  </div>
+		</div>
+		</div>
+		<script type="text/javascript">
+			var items =document.getElementsByClassName("item");//获取图片
+			var points =document.getElementsByClassName("point");//获取点
+			var goPrebtn=document.getElementById("goPre");
+			var goNextbtn=document.getElementById("goNext");
+			var index=0;//index表示第几张图片在显示,第index张图片有active属性
+
+			var allclear=function(){
+				for(var i=0;i<items.length;i++){
+					items[i].className="item";
+				}
+				for(var i=0;i<items.length;i++){
+					points[i].className="point"
+				}
+			}//清空类名里面的active
+			var goIndex =function(){
+				allclear();//去掉上一个的active类名
+				items[index].className="item active";//类名变为 item active，显示出第index张图片
+				points[index].className="point active";//对应的第index个点的背景颜色变为白色
+			}
+			var goNext=function(){
+				if(index<4){
+				index++;}
+				else{
+					index=0;
+				}
+				goIndex();
+			}//调用goIndex函数依次改变他们的类名,显示出对应的图片和对应点的背景颜色
+			var goPre=function(){
+				if(index>0){
+					index--;
+				}
+				else{
+					index=4;
+				}
+				goIndex();
+			}//调用goIndex函数依次改变他们的类名,显示出对应的图片和对应点的背景颜色
+
+			goNextbtn.addEventListener("click",function(){
+				goNext();
+			});//将按钮于gonext函数联系起来
+			goPrebtn.addEventListener("click",function(){
+				goPre();
+			});//将按钮与gopre函数联系起来
+			for(var i=0;i<points.length;i++){
+				points[i].addEventListener("click",function(){
+				var pointIndex=this.getAttribute("data-index")//点击显示对应点的数值赋给pointIndex
+				index=pointIndex;//将pointIndex的值再赋给index
+				goIndex();//直接调用goIndex函数显示出对应的图片和点的背景颜色
+				time=0;//点击小圆点time清零,停两秒才计数
+					})
+			}
+
+			var time=0;
+			setInterval(function() {
+				time++;
+				if(time==20){
+					time=0;
+				goNext();}
+			} ,500)
+			//2000ms计数器
+		</script>
+	</body>
+</html>

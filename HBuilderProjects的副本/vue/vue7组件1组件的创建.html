@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 全局组件 -->
+    <todo-list></todo-list>
+    <!-- 私有组件 -->
+    <ttt></ttt>
+  </div>
+  <div id="app2">
+    <h3>这是一个h3标签{{msg}}</h3>
+  </div>
+  <script type="text/javascript">
+    //新建一个全局组件,template里的内容可以写在html里
+    Vue.component('todo-list',{
+      template:"#app2",
+      data:function(){//全局组件里可以有data属性，但是必须是一个function而且必须返回一个对象
+        return {
+          msg:"haokou"
+        }
+      }
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+
+      },
+      components:{//创建一个私有组件
+        ttt:{
+          template:"<h2>这是一个私有组件</h2>"
+        }
+      }
+    })
+  </script>
+</body>
+</html>

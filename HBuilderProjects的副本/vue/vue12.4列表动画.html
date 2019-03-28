@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js" charset="utf-8"></script>
+  <title>Document</title>
+  <style media="screen">
+    li{
+      line-height: 30px;
+      border: 1px solid #eee;
+      background-color: #fffefe;
+      width: 100%;
+    }
+    li:hover{
+      background-color: pink;
+    }
+    .v-enter,
+    .v-leave-to{
+      opacity: 0;
+      transform: translateY(90px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+      transition: all .3s ease;
+    }
+    /* 使用v-move和v-leave-active实现移除时下面的渐渐飘上来 */
+    .v-move{
+      transition: all .4s ease;
+    }
+    .v-leave-active{
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <dic id="app">
+    <label>
+      Id:<input type="text" v-model="id">
+    </label>
+    <label>
+      Name:<input type="text" v-model="name">
+    </label>
+    <input type="button" @click="add" value="添加">
+
+      <!-- appear实现页面展示时候，出场的效果
+      tag设置li标签外用ul包裹 -->
+      <transition-group appear tag="ul">
+        <li v-for="(item,i) in list" :key="item.id" @click="del(i)">{{item.id}}----{{item.name}}</li>
+      </transition-group>
+    
+  </dic>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        id:"",
+        name:"",
+        list:[{id:1,name:"小明"},{id:2,name:"小红"}]
+      },
+      methods:{
+        add(){
+          this.list.push({id:this.id,name:this.name})
+        },
+        del(i){
+          this.list.splice(i,1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

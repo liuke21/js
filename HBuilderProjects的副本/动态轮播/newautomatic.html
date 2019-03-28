@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#wrape{
+				width: 720px;
+				height: 360px;
+				position: relative;
+			}
+			.list{
+				width:100% ;
+				height: 100%;
+				list-style: none;
+				position: absolute;
+			}
+			.item{
+				width:100% ;
+				height: 100%;
+				position: absolute;
+				opacity: 0;
+				transition: 1s;
+			}
+			.item.active{
+				z-index: 10;
+				opacity: 1;
+			}
+			/* 刚开始opacity等于0即第一张不能显示,所以令第一张的opacity等于1显示出第一张照片 */
+			.liuke{
+				opacity: 1;
+			}
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			.pre,.nex{
+				width: 41px;
+				height: 69px;
+				z-index: 1000;
+				position: absolute;
+				top: 150px;
+				cursor: pointer;
+			}
+			.pre{
+				left:0;
+				background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -84px 50%;
+
+			}
+			.pre:hover{
+				background-position: 0px 50%;
+			}
+			.nex{
+				right: 0;
+				background: url(https://i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -125px 50%;
+			}
+			.nex:hover{
+				background-position: -42px 50%;
+			}
+			.pointlist{
+				position: absolute;
+				list-style:none ;
+				z-index: 1000;
+				right: 30px;
+				bottom:10px ;
+			}
+			.pointlist li{
+				cursor: pointer;
+			}
+			.point{
+				background-color: #888888;
+				width: 10px;
+				height: 10px;
+				float: left;
+				margin-right: 5px;
+				border-radius: 100%;
+
+			}
+			.point.active{
+				background-color:#EEEEEE;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="wrape">
+			<ul class="list">
+				<li class="item liuke"><img src="https://i1.mifile.cn/a4/xmad_15500560064953_Bgumq.jpg" ></li>
+				<li class="item"><img src="https://i8.mifile.cn/v1/a1/af921fca-4c8d-28a5-c0c5-8ed859f13994!720x360.webp" ></li>
+				<li class="item"><img src="https://i8.mifile.cn/v1/a1/adb47513-e18c-2b23-c5f1-2487f4e55f33!720x360.webp" ></li>
+				<li class="item"><img src="https:////i1.mifile.cn/a4/xmad_15487436335904_xLtUu.jpg" > </li>
+				<li class="item"><img src="https://i1.mifile.cn/a4/xmad_15489220087388_KMgyE.jpg" ></li>
+			</ul>
+			<!-- <button type="button" class="pre"><</button>
+			<button type="button" class="nex">></button> -->
+			<div class="pre"></div>
+			<div class="nex"></div>
+			<ul class="pointlist">
+				<li class="point active" data-index="0"></li>
+				<li class="point" data-index="1"></li>
+				<li class="point" data-index="2"></li>
+				<li class="point" data-index="3"></li>
+				<li class="point" data-index="4"></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			var items=document.getElementsByClassName("item");
+			var prebtn=document.getElementsByClassName("pre")[0];
+			var nexbtn=document.getElementsByClassName("nex")[0];
+			var points=document.getElementsByClassName("point");
+
+			var index=0;
+			var allclear=function(){
+				for(var i=0;i<items.length;i++){
+					items[i].className="item"
+					points[i].className="point"
+				}
+			}
+			var goIndex=function(){
+
+				allclear();
+				items[index].className="item active"
+				points[index].className="point active"
+			}
+			var gonex=function(){
+				if(index<4){
+					index++;
+				}else{
+					index=0;
+				}
+				goIndex();
+			}
+			var gopre=function(){
+				if(index==0){
+					index=4
+				}else{
+					index--;
+				}
+				goIndex();
+			}
+			nexbtn.addEventListener("click",function(){
+
+				gonex();
+			});
+			prebtn.addEventListener("click",function(){
+
+				gopre();
+			});
+			for(var i=0;i<points.length;i++){
+				points[i].addEventListener("mousemove",function(){
+					var getindex=this.getAttribute("data-index");
+					index=getindex;
+					goIndex();
+				})
+			}
+			setInterval(function(){
+				gonex();
+			},5000)
+
+		</script>
+	</body>
+</html>

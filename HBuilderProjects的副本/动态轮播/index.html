@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#wrap {
+
+				width: 1598px;
+				height: 799px;
+				position: relative;
+					overflow: hidden;
+			}
+			.list {
+				width: 7990px;
+				height: 799px;
+				list-style: none;
+
+			}
+			.item {
+				width: 1598px;
+				height: 799px;
+				float: left;
+				/* position: absolute; */
+			}
+			/* .item:nth-child(1){
+				background-color: red;
+			}
+			.item:nth-child(2){
+				background-color: blueviolet;
+			}
+			.item:nth-child(3){
+				background-color: rosybrown;
+			}
+			.item:nth-child(4){
+				background-color: skyblue;
+			}
+			.item:nth-child(5){
+				background-color: aquamarine;
+			} */
+			.item.active{
+				z-index: 100;
+			}
+			img {
+				width: 100%;
+				height: 100%;
+			}
+			.pointlist{
+				height: 15px;
+				position: absolute;
+				bottom: 10px;
+				left: 50%;
+				z-index: 100;
+				list-style: none;
+				margin-left: -45px;
+			}
+			.pointlist li{
+				width: 15px;
+				height: 15px;
+				float: left;
+				background-color: black;
+				border-radius: 50%;
+				line-height: 15px;
+				color: white;
+				text-align: center;
+				margin-right: 3px;
+				cursor: pointer;
+			}
+			.pointlist li.active{
+				background-color: orangered;
+					border: 3px solid yellow;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<ul class="list">
+				 <li class="item"><img src="https://i8.mifile.cn/v1/a1/3de85dc4-9a36-17d0-2943-327308535733!720x360.webp" ></li>
+				 <li class="item"><img src="https://i8.mifile.cn/v1/a1/af921fca-4c8d-28a5-c0c5-8ed859f13994!720x360.webp" ></li>
+				 <li class="item"><img src="https://i8.mifile.cn/v1/a1/adb47513-e18c-2b23-c5f1-2487f4e55f33!720x360.webp" ></li>
+				 <li class="item"><img src="https:////i1.mifile.cn/a4/xmad_15487436335904_xLtUu.jpg" > </li>
+ 				<li class="item"><img src="https://i1.mifile.cn/a4/xmad_15489220087388_KMgyE.jpg" ></li>
+			</ul>
+			<ul class="pointlist">
+				<li class="point active">1</li>
+				<li class="point">2</li>
+				<li class="point">3</li>
+				<li class="point">4</li>
+				<li class="point">5</li>
+			</ul>
+		 </div>
+		 <script type="text/javascript">
+		 	var items=document.getElementsByClassName("item");
+			var list=document.getElementsByClassName("list")[0];
+			var content=document.getElementById("wrap");
+			var state ={
+				beginX:0,
+				nowX:0,
+				endX:0,
+				index:0
+			}
+			//跟手函数
+			var _slice=function(){
+				var detailX=state.nowX-state.beginX;
+				list.style.marginLeft=-state.index*1598 + detailX + "px"
+			}
+			//复位函数
+			var _reset=function(){
+
+				list.style.transition="all .3s"
+				list.style.marginLeft=state.index*-1598 +"px"
+			}
+			//判断是否移动
+			var _judge=function(){
+				var detailX=state.endX-state.beginX
+
+				if(detailX >= window.innerWidth*2/5){
+					//上一张
+					_gopre()
+				}else if (detailX < -window.innerWidth*2/5) {
+					//下一张
+					_gonex()
+				}else {
+					//复位
+					_reset()
+				}
+			}
+			//下一张
+			var _gonex=function(){
+				if(state.index<items.length-1){
+					state.index++;
+					list.style.transition="all .3s"
+					list.style.marginLeft=-state.index*1598+"px"
+					clearactive();
+					points[state.index].className="point active"
+				}else {
+					state.index=0
+					clearactive();
+						points[state.index].className="point active"
+					_reset()
+				}
+			}
+			//上一张
+			var _gopre=function(){
+				if(state.index>0){
+					state.index--;
+					list.style.transition="all .3s"
+					list.style.marginLeft=-state.index*1598 + "px"
+					clearactive();
+					points[state.index].className="point active"
+				}else {
+					//复位
+					_reset()
+				}
+			}
+			//触摸开始
+			content.addEventListener('touchstart',function(e){
+				// console.log(e.targetTouches[0].clientX);
+				list.style.transition="none"
+				state.beginX = e.targetTouches[0].clientX;
+			})
+			//触摸移动
+			content.addEventListener("touchmove",function(e){
+				// console.log(e.changedTouches[0].clientX);
+				var nowX = e.changedTouches[0].clientX;
+				state.nowX = nowX;
+				_slice()
+			})
+			//触摸结束
+			content.addEventListener("touchend",function(e){
+					state.endX = e.changedTouches[0].clientX;
+					_judge()
+			})
+			var points=document.getElementsByClassName("point")
+			// for(var i=0;i<points.length;i++){
+			// 	points[i].onmousemove=showlist;
+			// 	}
+			// function showlist(){
+			// 	for(var i=0;i<points.length;i++){
+			// 		if(points[i]==this){
+			// 			points[i].className="point active"
+			// 			items[i].className="item active";
+			// 		}else{
+			// 			points[i].className="point"
+			// 			items[i].className="item";
+			// 		}
+			// 	}
+			// }
+			/* items[index].className="item active"; */
+			var clearactive=function(){
+				for(var i=0;i<items.length;i++){
+					points[i].className="point"
+				}
+			}
+			// var goindex=function(){
+			// 	clearactive();
+			// 	items[indesx].className="item active"
+			// 	points[indesx].className="point active"
+			// }
+			// var gonext=function(){
+			// 	if(indesx<items.length-1){
+			// 	indesx++;}
+			// 	else{
+			// 		indesx=0;
+			// 	}
+			// 	goindex();
+			// }
+			// setInterval(function(){
+			// 	// gonext();
+			// 	_gonex()
+			// },5000)
+		 </script>
+	</body>
+</html>

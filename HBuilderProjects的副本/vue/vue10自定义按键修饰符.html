@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <input type="text" @keyup.f2="show" v-model="value">
+    <ul>
+      <li v-for="(item,index) in list" :key="index">{{item}}</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    //自定义按键修饰符
+    Vue.config.keyCodes.f2 = 113
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        value:"",
+        list:[]
+      },
+      methods:{
+        show(){
+          this.list.push(this.value)
+          this.value=""
+        }
+      }
+    })
+  </script>
+</body>
+</html>

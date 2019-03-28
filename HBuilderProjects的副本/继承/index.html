@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var animal = function(){
+				this.eat= function(){
+					console.log("i'm eatting!")
+				}
+			}
+			var human=function(){
+				this.say=function(){
+					console.log("you can speak chinese")
+				}
+			}
+			human.prototype= new animal();
+		</script>
+	</body>
+</html>

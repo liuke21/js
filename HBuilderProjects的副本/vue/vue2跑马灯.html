@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <button type="button" name="button" @click="run">{{msg1}}</button>
+    <button type="button" name="button" @click="stop">{{msg2}}</button>
+    <p v-text="meg3"></p>
+  </div>
+  <script>
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        msg1:"浪起来",
+        msg2:"稳住",
+        meg3:"猥琐发育，别浪~~~",
+        di:null
+      },
+      methods:{
+        run(){
+          if(this.di!=null) return;
+      this.di=  setInterval( () => {
+            var start = this.meg3.substring(0,1)
+            var end = this.meg3.substring(1)
+            this.meg3 = end + start
+
+        },100)
+        console.log(this.di)
+      },
+      stop(){
+        clearInterval(this.di)
+        this.di=null
+      }
+      }
+    })
+  </script>
+</body>
+</html>

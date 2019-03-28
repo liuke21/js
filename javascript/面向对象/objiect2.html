@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+
+    function people(name,age){
+      var _this={}
+      _this.name=name
+      _this.age=age
+      _this.say=function(){
+        alert("nihao"+ _this.name +_this.age)
+      }
+      return _this;
+    }
+    function teacher(name,age){
+      var _this=people(name,age)
+      //调用父类的say方法
+      var supersay=_this.say;
+      _this.say=function(name,age){
+        supersay.call(_this)
+        alert("lihou"+_this.name+_this.age)
+      }
+      return _this;
+    }
+    var t=teacher("liuke",18)
+    t.say()
+
+  </script>
+</body>
+</html>

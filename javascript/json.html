@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    //json:文件交互的格式
+    //json数据类型：对象、数组；
+    //属性必须用双括号括住；
+    //属性值：字符串、数字、布尔值、null、数组、对象
+    var ob1='{"name":"liuke","age":18,"gender":"男"}'//对象
+    var ob2='[1,2,"刘科"]'//数组
+    //json转换为js:JSON.parse
+    var ow=JSON.parse(ob1)
+    var om=JSON.parse(ob2)
+    console.log(ow.age)
+    console.log(om[1])
+    //js转换为json:JSON.stringify
+    var ob3=[19,45,"zhangsan"]
+     var ob=JSON.stringify(ob3)
+     console.log(ob)
+
+  </script>
+</body>
+</html>

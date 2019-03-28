@@ -1,0 +1,34 @@
+*{
+  box-sizing: border-box;
+}
+.side-bar{
+  position: relative;
+  width: 100%;
+}
+.side-bar .nav a,.side-bar .tag-list a{
+  display: block;
+}
+.main{
+  width: 100%;
+  position: relative;
+  padding: 0 10px;
+}
+.main .article{
+  margin-right: 0px;
+}
+.article-list{
+  margin: 0;
+}
+.nav,.tag-list{
+  display: none;
+}
+label{
+  top: 10px;
+  right: 0px;
+  position: absolute;
+  display: block;
+}
+#shenc-show:checked ~ .nav,
+#shenc-show:checked ~ .tag-list{
+  display: block;
+}

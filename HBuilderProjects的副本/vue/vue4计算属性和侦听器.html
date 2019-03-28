@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="comp">
+			姓:<input v-model="firstname" @keyup="firsname">
+			名:<input v-model="lastname" @keyup="lasname">
+			<input type="text" v-model="fullname">
+			<!-- <div>
+				{{fullname}}
+			</div> -->
+			<div>
+				{{count}}
+			</div>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:"#comp",
+				data:{
+					firstname:"",
+					lastname:"",
+					fullname:"",
+					count:0,
+				},
+				methods:{
+					firsname(){
+						this.fullname=this.firstname + '-' + this.lastname
+						this.count++
+					},
+					lasname(){
+						this.fullname=this.firstname + '-' + this.lastname
+						this.count++
+					},
+				},
+// computed:{//使用计算器属性得到fullname的值不用再data中定义它;在computed中，可以定义一些属性，这些属性，叫做【计算属性】，本质
+//就是一个方法，只不过我们在使用这些计算属性的时候，是把他们的名称直接当作属性来使用，并不会把计算属性当作方法调用
+				// 	fullname:function(){//computed需要把结果通过return返回
+				// 		return this.firstname + " " + this.lastname
+				// 	}
+				// },
+				// watch:{//使用这个属性，可以监视data中指定数据的变化，然后触发这个watch中对应的function处理函数
+				// 	fullname:function(){
+				// 		this.count++
+				// 	},
+				// 	firstname:function(newVal,oldVal){
+				// 		this.fullname=newVal + '-' + this.lastname
+				// 	},
+				// 	lastname:function(newVal){
+				// 		this.fullname=this.firstname + '-' +newVal
+				// 	}
+				// }
+			})
+		</script>
+	</body>
+</html>

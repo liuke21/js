@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <p>
+    window对象是全局最大的，任何一个变量都是他的一个属性
+    1、在js中定义的变量的时候：var str="hello world"
+    实际上是给window对象添加属性：等价于：window.str="hello world"
+    2、在js中使用未定义的属性和方法都是window已经存在的
+       window.document == document
+       window.alert == alert
+       window.console.log() == console.log()
+    3、BOM的Location、History和Navigator三个对象
+       1、指定到某网页Location.href("www.baidu.com")|Location.go(n)\back(返回)\forward(上一页)
+    4、navigator获取浏览器信息
+  </p>
+</body>
+</html>

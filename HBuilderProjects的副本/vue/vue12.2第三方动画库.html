@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="animated.css">
+  <script src="vue.js" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="弹弹弹" @click="flag=!flag">
+    <!-- 通过enter-active-class="bounceIn" leave-active-class="bounceOut"设置入场方式和离开方式
+    通过:duration设置入场和出场时间 -->
+    <transition enter-active-class="bounceIn" leave-active-class="bounceOut" :duration="{enter:200,leave:400}">
+      <h3 v-if="flag" class="animated">这是一个h3</h3>
+    </transition>
+
+  </div>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        flag:false
+      }
+    })
+  </script>
+</body>
+</html>

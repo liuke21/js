@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		 #buttonclick {
+			display:inline-block;
+			padding:5px 8px;
+			background-color:#454545;
+			color:aqua;
+		}
+		.list {
+			list-style:none;
+			padding:5px 8px;
+			background-color: antiquewhite;
+			margin-top: 3px;
+			display:inline-block ;
+			display: none;
+		}
+		/* .item {
+			display: inline;
+		} */
+
+		</style>
+	</head>
+	<body>
+		<div id="buttonclick">
+			下拉展开
+		</div>
+		<br>
+		<ur class="list">
+			<li class="item">宝贝详情</li>
+			<li class="item">宝贝销量</li>
+		</ur>
+		<script type="text/javascript">
+			var buttonbt=document.getElementById("buttonclick");//获取buttonbt内容
+
+			var list=document.getElementsByClassName("list")[0]//获取list内容;
+
+			var isopen=false;
+
+
+			buttonbt.addEventListener("click" , function(){
+				isopen=!isopen//按下按钮后isopen取反
+
+				if(isopen){
+					buttonbt.innerHTML="点击隐藏";//改变buttonbt内容的"下拉展开"变为"点击隐藏"
+					list.style.display="inline-block";//显示出下拉的具体内容
+				}
+				else{
+					buttonbt.innerHTML="点击展开";//改变buttonbt内容的"点击隐藏"变为"点击展开"
+					list.style.display="none";//隐藏下拉的内容
+				}
+			})
+		</script>
+	</body>
+</html>

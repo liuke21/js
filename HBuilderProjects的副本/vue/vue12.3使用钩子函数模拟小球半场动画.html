@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+  <style media="screen">
+    .boll{
+      width:15px;
+      height:15px;
+      border-radius:50%;
+      background-color:red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="button"value="快到碗里去" @click="flag=!flag">
+    <transition
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+    >
+      <div class="boll" v-show="flag"></div>
+    </transition>
+  </div>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el:"#app",
+        data:{
+          flag:false
+        },
+        methods:{//第一个参数时el，表示控制的动画时el里的元素
+          beforeEnter(el){//进入之前元素的初始状态
+            el.style.transform="translate(0px,0px)"
+          },
+          enter(el,done){//表示动画进入之后的状态
+            // el.offsetWidth表示动画的过度过程
+            el.offsetWidth
+            el.style.transform="translate(150px,450px)"
+            el.style.transition='all 1s ease'
+            //done()直接调用后面的afterEnter函数
+            done()
+          },
+          afterEnter(el){
+            // flag取反 flag true=>flase小点消失
+            this.flag=!this.flag
+          }
+        }
+      })
+    </script>
+</body>
+</html>

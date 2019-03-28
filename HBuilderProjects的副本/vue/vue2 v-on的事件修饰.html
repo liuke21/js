@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js" type="text/javascript" charset="utf-8"></script>
+  <title>Document</title>
+  <style media="screen">
+    .outdiv{
+      width:200px;
+      height:50px;
+      background:red;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 使用.stop组织冒泡
+    <div class="outdiv" @click="bdivtn">
+      <input type="button" value="点我" @click.stop="btnclick">
+    </div> -->
+
+    <!-- 使用.self点击事件本身，才能触发该事件
+    <div class="outdiv" @click.self="bdivtn">
+      <input type="button" value="点我" @click="btnclick">
+    </div> -->
+    
+    <!-- .prevent阻止默认事件
+    <a href="https://www.baidu.com" @click.prevent="hrefbtn">百度一下</a> -->
+
+    <!-- .once事件只被执行一次
+    <a href="https://www.baidu.com" @click.prevent.once="hrefbtn">百度一下</a> -->
+
+    <!-- .capture捕获触发机制事件，即先执行.capture事件
+    <div class="outdiv" @click.capture="bdivtn">
+      <input type="button" value="点我" @click="btnclick">
+    </div> -->
+  </div>
+  <script>
+    var vm = new Vue({
+      el:"#app",
+      data:{
+
+      },
+      methods:{
+          bdivtn(){
+            console.log("点击了div")
+          },
+          btnclick(){
+            console.log("点击了buttton")
+          },
+          hrefbtn(){
+              console.log("点击了href")
+          }
+      }
+    })
+  </script>
+</body>
+</html>

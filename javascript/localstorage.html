@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p>localstorage浏览器存储功能也是一个对象,可以调用SetItem,getitem方法存储内容
+		localstorage.Setitem()设置内容
+		localstorage.remove("name")去除内容
+		</p>
+		<script type="text/javascript">
+			window.addEventListener("storage",function(e){
+				console.log(e)
+			})
+		</script>
+	</body>
+</html>

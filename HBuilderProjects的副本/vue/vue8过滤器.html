@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js" charset="utf-8"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 过滤器调用时候的格式{{data | 过滤器的名字}} -->
+  <div id="app">{{msg | msgform('疯狂','dh') | text}}</div>
+
+  <script type="text/javascript">
+    // 过滤器定义的格式 vue.filter('过滤器名称',function(data){要过滤的内容})
+    //function(data,arg,arg2,argn)arg可以根据过滤器的名字进行过滤
+    Vue.filter('msgform',function(msg,arg,arg2){
+      return msg.replace('我',arg2)
+    })
+    //replace里面除了可以写字符串之外还可以写正则
+    // Vue.filter('msgform',function(msg,arg,arg2){
+    //   return msg.replace(/单纯/g,arg)
+    // })
+//调用过滤器可以多加几个管道符，进行多次过滤
+    Vue.filter('text',function(msg){
+      return msg+'======='
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        msg:'曾经的我是一个单纯的少年，单纯的我，单纯的生活在这个世界'
+      }
+    })
+  </script>
+</body>
+</html>

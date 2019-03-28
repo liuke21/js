@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .phone{
+        height:300px;
+    }
+    ul{
+      width:1190px;
+      margin:0 auto;
+      list-style:none;
+    }
+    li{
+      height:296px;
+      width:200px;
+      float:left;
+      box-shadow:3px 2px 30px rgba(0,0,0,.1);
+      position:relative;
+      text-align:center;
+      transition:all .8s;
+
+    }
+     img{
+       padding-right: 0;
+      width:180px;
+      transition:all .6s;
+
+    }
+    ul .on{
+      text-align:left;
+      width:370px;
+      height:296px;
+      box-shadow:none;
+      background: url(https://misc.360buyimg.com/channel/shouji/5.0.0/css/i/bg.png) no-repeat;
+      padding-left:20px;
+    }
+    .on img{
+      padding-right: 0;
+      position:absolute;
+      vertical-align: middle;
+      width:270px;
+      right:0;
+      bottom:0;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <ul class="phone-iitem">
+      <li class="on" >
+        <div class="name">
+          小米9
+        </div>
+        <div class="info">
+          小米9一月九号发布
+        </div>
+      <img src="https://img11.360buyimg.com/cms/jfs/t1/10701/5/11411/12315/5c6fa23eEe5f6a83a/9ad5e8b6fad3fbd4.png!q95.webp">
+      </li>
+      <li><div class="name">
+        小米9
+      </div>
+      <div class="info">
+        小米9一月九号发布
+      </div>
+    <img src="https://img11.360buyimg.com/cms/jfs/t1/10806/19/11068/65312/5c6b5e3aEf307426b/01060c63103d9f78.png!q95.webp">
+    </li>
+    <li><div class="name">
+      小米9
+    </div>
+    <div class="info">
+      小米9一月九号发布
+    </div>
+  <img src="https://img11.360buyimg.com/cms/jfs/t1/25274/30/7646/85320/5c6f5018E968c2517/d431883acac7cb1f.png!q95.webp">
+  </li><li><div class="name">
+    小米9
+  </div>
+  <div class="info">
+    小米9一月九号发布
+  </div>
+<img src="https://img11.360buyimg.com/cms/jfs/t1/9972/13/14078/44094/5c4fb359E5b7bfc06/8dae9ca10b4f3691.png!q95.webp">
+</li><li><div class="name">
+  小米9
+</div>
+<div class="info">
+  小米9一月九号发布
+</div>
+<img src="https://img11.360buyimg.com/cms/jfs/t1/14757/16/8137/54496/5c72ae47E32256acf/a076eac7fed0df34.png!q95.webp">
+</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    var shou=document.getElementsByTagName("li")
+    for(var i=0;i<shou.length;i++){
+      shou[i].onmousemove=shott;
+    }
+    function shott(){
+      for(var i=0;i<shou.length;i++){
+        if(shou[i]==this){
+          shou[i].className="on"
+        }else{
+          shou[i].className=""
+        }
+      }
+    }
+
+  </script>
+
+</body>
+</html>

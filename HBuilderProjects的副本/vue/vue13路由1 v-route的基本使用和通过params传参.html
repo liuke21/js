@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+  <!-- 引入路由模块 -->
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <style media="screen">
+    .router-link-active{
+      color: red;
+      background-color: blue;
+      font-size: 30px;
+    }
+    span{
+      cursor: pointer;
+    }
+    .v-enter,
+    .v-leave-to{
+      opacity: 0;
+      transform: translateX(150px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+      transition: all .5s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- a标签通过ur地址展示对应的组件 -->
+    <!-- <a href="#/register">注册组件</a>
+    <a href="#/login">登录组件</a> -->
+
+    <!-- router-link默认为a标签 -->
+    <!-- 通过url中添加的id向组件传递参数 -->
+    <router-link to="/register?id=10" tag="span">注册</router-link>
+    <router-link to="/login" tag="span">登录</router-link>
+
+    <!-- router-view是vue提供的，到时候路由规则匹配到的组件将会展示在这里 -->
+    <!-- 为组件添加动画 -->
+    <transition mode="out-in">
+      <router-view></router-view>
+    </transition>
+  </div>
+  <script type="text/javascript">
+    // 创建组件对象
+    var login={
+      template:"<h3>登录组件</h3>"
+    }
+    var register={//通过生命周期钩子函数$route获得route对象再找id
+      template:"<h3>注册组件{{$route.query.id}}</h3>",
+      created(){
+        // console.log(this.$route)
+      }
+    }
+    var routerObj= new VueRouter({
+      //route这个路由匹配对象表示【路由匹配规则】的意思
+      routes:[//路由匹配规则
+              //每个规则都是一个对象，必须有两个属性1.path监听连接地址2.component组件监听到对应的连接地址调用对应的组件
+        {path:'/',redirect:'/login'},//重定向，即刚打开页面为展示login组件，比修改为login对应的url地址
+        {path:'/login',component:login},
+        {path:'/register',component:register}
+      ],
+      linkActiveClass:'router-link-active'//默认就是这个哦,可以自己修改类名
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+
+      },
+      router:routerObj//将路由规则注册到vm实例上，用来监听UL地址变化然后调用对应的组件
+    })
+  </script>
+</body>
+</html>

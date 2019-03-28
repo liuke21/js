@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- //瀑布流步骤：1、创建一个弹性盒子flex,分成四列；2、通过计算每一列的高度决定在哪一列添加照片，先获得该列，列.children添加子元素,for循环计算子元素中
+  //每张照片的高度，比较每一列中子元素img的总高度；3、将比较完之后的该列返回，为子元素添加img；4、设置定时器进行图片的定时渲染
+  //5、设置元素的高度即可以滚动的高度，当可以滚动的高度大于元素的高度的时候停止添加照片
+  //6、为滚动条添加监听器，当滚动到一定位置是，继续进行图片的渲染，此时将增加元素的高度 windowheight+=500; -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    *{
+        margin:0;
+        padding:0;
+    }
+    body{
+      background:#eee;
+    }
+    .pubu-wrap{
+      width:70%;
+      margin:0 auto;
+      display:flex;
+      flex-direction:row;
+      /* height:800px; */
+    }
+    .item{
+      flex:1;
+      margin:18px;
+    }
+    .item img{
+      width:100%;
+      border:10px solid white;
+      margin:8px;
+      transition:all .3s ease-in-out;
+    }
+    .item img:hover{
+      transform:scale(1.05);
+    }
+  </style>
+  <script type="text/javascript">
+  //设置可以添加的元素的高度，当可以滚动的高度大于元素的高度的时候，停止添加照片
+  var windowheight=window.screen.height;
+  var s=0;
+  //页面加载完毕后触发insert方法
+  window.onload=function(){
+    insert();
+    //document.documentElement.scrollTop已经滚动内容的高度
+    //window.screen.height窗口的高度
+    //document.documentElement.scrollHeight可以滚动的最大高度
+    window.document.addEventListener("scroll",function(){
+      //当已经滚动的高度加上屏幕的高度大于滚动之前可以滚动的高度（元素的高度）的时候，即可以滚动到距离底部的时候；
+      //可以滚动的高度（元素的高度）增加500，继续添加照片，并以此循环
+      if(document.documentElement.scrollTop + window.screen.height > document.documentElement.scrollHeight){
+        //元素高度增加500
+        windowheight+=500;
+        insert();
+      }
+    })
+  }
+  //插入图片
+  var insert=function(){
+    var inter=setInterval(function(){
+      //当可以滑动的高度（元素的高度）大于屏幕的高度额时候关掉定时器,不在添加照片,即此时可以滑动的高度为屏幕的高度
+      if(document.documentElement.scrollHeight > windowheight){
+        clearInterval(inter);
+      }
+          var min=mindiv()
+          s++;
+          if(s>8){
+            s=1;
+          }
+          var img=document.createElement("img")
+          img.setAttribute("src","img/"+s+".jpg")
+          min.appendChild(img)
+
+    },100)
+  }
+    //定义最小高度的一列
+    var mindiv=function(){
+      //获取每一列
+      var imag1=document.getElementById("imag-1")
+      var imag2=document.getElementById("imag-2")
+      var imag3=document.getElementById("imag-3")
+      var imag4=document.getElementById("imag-4")
+      //为每一列添加子元素img
+        var Imag_1=imag1.children;
+        var Imag_2=imag2.children;
+        var Imag_3=imag3.children;
+        var Imag_4=imag4.children;
+      //获取每一列的高度
+        var img1hig=calcu(Imag_1)
+        var img2hig=calcu(Imag_2)
+        var img3hig=calcu(Imag_3)
+        var img4hig=calcu(Imag_4)
+        //判断哪一列的高度最小，并返回该行的对象
+        var minheight=Math.min(img1hig,img2hig,img3hig,img4hig)
+        if(minheight==img1hig){
+          return imag1
+        }
+        else if (minheight==img2hig){
+          return imag2
+        }else if(minheight==img3hig){
+          return imag3
+        }else if(minheight==img4hig){
+          return imag4
+        }
+    }
+    //计算每一列刚添加的子元素的高度，并返回
+    var calcu=function(Imag){
+      if(Imag==null || Imag.length==0){
+        return 0;
+      }else{
+      var height=0;
+      //遍历Img里面的图片并计算高度
+      for(var i=0;i<Imag.length;i++){
+        var h=Imag[i].height
+        height+=h
+      }
+      return height
+    }
+  }
+  </script>
+</head>
+<body>
+  <div class="pubu-wrap">
+    <div class="item" id="imag-1"></div>
+    <div class="item" id="imag-2"></div>
+    <div class="item" id="imag-3"></div>
+    <div class="item" id="imag-4"></div>
+  </div>
+</body>
+</html>

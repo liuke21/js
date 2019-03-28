@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+  <style>
+    .v-enter,
+    .v-leave-to{
+      opacity:0;
+      transform:translateX(130px);
+    }
+    .v-enter-active,
+    .v-leave-active{
+      transition:all .3s ease;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="button" value="registr" @click="comName='registr'">
+    <input type="button" value="login" @click="comName='login'">
+    <!-- is指定要展示组建的名称，设置comame为一个占位符，在data中控制它要展示哪个组件 -->
+    <!-- 组件切换过程中实现过渡动画  mode设置切换动画的顺序先出后进-->
+    <transition mode="out-in">
+      <component :is="comName"></component>
+    </transition>
+  </div>
+  <script type="text/javascript">
+    Vue.component('registr',{
+      template:"<h3>注册组件</h3>"
+    })
+    Vue.component('login',{
+      template:"<h3>登录组件</h3>"
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        comName:''
+      }
+    })
+  </script>
+</body>
+</html>

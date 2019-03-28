@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<style type="text/css">
+			body,html{
+				width: 100%;
+				height: 100%;
+			}
+			#di1 {
+				width:200px;
+				height: 200px;
+				background-color:aliceblue;
+				position:relative;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="di1">
+			
+		</div>
+		
+		<script type="text/javascript">
+			var isMove = false;
+		var di1 = document.getElementById("di1");
+		var changeposition = function(x,y){
+			if(isMove)
+			{di1.style.left = x -100 + "px";
+			di1.style.top = y -100 + "px";
+			}
+		}
+		di1.addEventListener("mousedown",function(){
+			isMove = true;
+		})
+		di1.addEventListener("mouseup",function(){
+			isMove = false;
+		})
+		
+		document.body.addEventListener("mousemove",function(result){
+			changeposition(result.clientX,result.clientY);
+			})
+		</script>
+	</body>
+</html>

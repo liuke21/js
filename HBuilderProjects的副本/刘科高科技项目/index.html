@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/auto.css">
+		<style type="text/css">
+			body,div,ul,li{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				font: 12px/20px "microsoft yahei";
+
+			}
+
+			.img{
+				margin-left:-500px;
+			}
+			img{
+				width: 2300px;
+			}
+
+			ul,li{
+				list-style: none;
+			}
+			.tn{
+				border-top:3px solid coral ;
+				height: 50px;
+				border-bottom: 1px solid aliceblue;
+				line-height: 50px;
+				/* font-family: "microsoft yahei";
+				font-style: 12px; */
+			}
+			.main{
+				margin: 0 auto;
+				width: 960px;
+				height: 48px;
+			}
+			.left-nav{
+				height: 48px;
+				float: left;
+			}
+			.left-nav li:hover,.left-nav li:hover a{
+				background-color: ghostwhite;
+				color: #FF7F50;
+
+			}
+			.right-nav{
+				height: 48px;
+				float: right;
+			}
+			.right-nav > li:hover,.right-nav > li > a:hover{
+				background-color: ghostwhite;
+				color: #FF7F50;
+			}
+			/* .item{
+				float: left;
+				padding:0 30px;
+			} */
+			.left-nav li{
+				float: left;
+				padding: 0 15px;
+			}
+			.right-nav > li{
+				float: left;
+				padding: 0 15px;
+			}
+			a{
+				text-decoration: none;
+				color: black;
+			}
+			.weibot{
+				display: none;
+				position: absolute;
+				width: 60px;
+
+
+			}
+			.weibot li{
+				padding: 0 12px;
+				margin-left: -15px;
+				border: 1px solid #FF7F50;
+				border-top: none;
+				background-color: white;
+			}
+			.denglu:hover .weibot{
+				display: block;
+			}
+			.weibot li:hover,.weibot li:hover a{
+				background-color: lemonchiffon;
+				color: coral;
+			}
+			.content{
+				height: 1000px;
+				padding-top: 30px;
+				background-color: red;
+			}
+			.c-nav{
+				width: 960px;
+				height: 1000px;
+				margin:0 auto;
+				background-color: white;
+			}
+			.tc-nav{
+				margin: 0 auto;
+
+			}
+			.tc-nav a img,.qiedian a img{
+				width: 530px;
+				margin-top: 0px;
+				transition: .6s linear;
+			}
+		    .tc-nav .input{
+				width: 300px;
+				height: 40px;
+				margin-left: 30px;
+				display: inline-block;
+				margin-top: 2px;
+
+			}
+			h1{
+				border: 4px solid #FF7F50;
+				margin: 20px 350px;
+				padding: 20px 30px;
+				text-align: center;
+				display: inline-block;
+			}
+			.qie {
+				border: 4px solid #FF7F50;
+				margin: 20px 350px;
+				padding: 20px 30px;
+				text-align: center;
+				display: inline-block;
+				font-size: 2em;
+				font-weight: bold;
+			}
+			h1:hover,.qie:hover{
+				background-color: antiquewhite;
+			}
+			.tc-nav a img:hover,.qiedian a img:hover{
+				width: 800px;
+			}
+			#movv{
+				position: fixed;
+				width: 100%;
+				background-color: white;
+				top: -54px;
+				transition: all .3s linear;
+			}
+			#movv.active{
+				top: 0;
+			}
+			#wrape .list img{
+				width: 960px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 第一个 -->
+		<div class="tn" id="movv">
+			<div class="main">
+				<ul class="left-nav">
+					<li class="item"><a href="#">设为首页</a></li>
+					<li class="item"><a href="#">手机新浪网</a></li>
+					<li class="item"><a href="#">移动客户端</a></li>
+				</ul>
+				<ul class="right-nav">
+					<li class="denglu">
+						<a href="#">登录</a>
+						<ul class="weibot">
+							<li><a href="#">私信</a></li>
+							<li><a href="#">评论</a></li>
+							<li><a href="#">@我</a></li>
+						</ul>
+					</li>
+					<li class="item"><a href="#">微博</a></li>
+					<li class="item"><a href="#">博客</a></li>
+					<li class="item"><a href="#">邮箱</a></li>
+					<li class="item"><a href="#">网站导航</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- 第二个 -->
+		<div class="tn" id="static">
+			<div class="main">
+				<ul class="left-nav">
+					<li class="item"><a href="#">设为首页</a></li>
+					<li class="item"><a href="#">手机新浪网</a></li>
+					<li class="item"><a href="#">移动客户端</a></li>
+				</ul>
+				<ul class="right-nav">
+					<li class="denglu">
+						<a href="#">登录</a>
+						<ul class="weibot">
+							<li><a href="#">私信</a></li>
+							<li><a href="#">评论</a></li>
+							<li><a href="#">@我</a></li>
+						</ul>
+					</li>
+					<li class="item"><a href="#">微博</a></li>
+					<li class="item"><a href="#">博客</a></li>
+					<li class="item"><a href="#">邮箱</a></li>
+					<li class="item"><a href="#">网站导航</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- <div class="img">
+			<img src="https://n.sinaimg.cn/default/4b1f129e/20190125/newyear.png" >
+		</div> -->
+		<div class="content">
+			<div class="c-nav">
+				<div id="wrape">
+					<ul class="list">
+						<li class="itemz liuke"><img src="https://i1.mifile.cn/a4/xmad_15500560064953_Bgumq.jpg" ></li>
+						<li class="itemz"><img src="https://i8.mifile.cn/v1/a1/af921fca-4c8d-28a5-c0c5-8ed859f13994!720x360.webp" ></li>
+						<li class="itemz"><img src="https://i8.mifile.cn/v1/a1/adb47513-e18c-2b23-c5f1-2487f4e55f33!720x360.webp" ></li>
+						<li class="itemz"><img src="https:////i1.mifile.cn/a4/xmad_15487436335904_xLtUu.jpg" > </li>
+						<li class="itemz"><img src="https://i1.mifile.cn/a4/xmad_15489220087388_KMgyE.jpg" ></li>
+					</ul>
+					<!-- <button type="button" class="pre"><</button>
+					<button type="button" class="nex">></button> -->
+					<div class="pre"></div>
+					<div class="nex"></div>
+					<ul class="pointlist">
+						<li class="point active" data-index="0"></li>
+						<li class="point" data-index="1"></li>
+						<li class="point" data-index="2"></li>
+						<li class="point" data-index="3"></li>
+						<li class="point" data-index="4"></li>
+					</ul>
+				</div>
+				<div class="qie">
+					<a href="https://www.bilibili.com/">bilibili首页</a>
+				</div>
+					<div class="qiedian">
+					 <a href="https://space.bilibili.com/361206903"><img src="css/61549887840_.pic.jpg" ></a>
+					 <a href="https://search.bilibili.com/all?keyword=%E4%B8%9C%E4%BA%AC%E8%87%AA%E5%8A%A9%E6%B4%97%E8%A1%A3%E5%BA%97&from_source=banner_search&spm_id_from=333.334.b_62616e6e65725f6c696e6b.1"><img src="css/71549887898_.pic.jpg" ></a>
+					</div>
+				<h1><a href="https://www.douyu.com">斗鱼直播首页</a></h1>
+			   <div class="tc-nav">
+				<a href="https://www.douyu.com/988"><img src="css/chunbai.jpg" ><!-- <img src="https://i1.sinaimg.cn/dy/deco/2013/0329/logo/LOGO_1x.png" > --></a>
+				<a href="https://www.douyu.com/911"><img src="css/saobai.jpg" ><!-- <img src="https://i1.sinaimg.cn/dy/deco/2013/0329/logo/LOGO_1x.png" > --></a>
+				<!-- <div class="input">
+					<input type="password" name="hijk" />
+				</div> -->
+			   </div>
+			   <div class="qie">
+			   	<a href="https://egame.qq.com/">企鹅电竞首页</a>
+			   </div>
+				<div class="qiedian">
+									<a href="https://egame.qq.com/132214784"><img src="css/8gkjk.jpg" ></a>
+									<a href="https://egame.qq.com/212680135"><img src="css/yaoshen.jpg" ></a>
+				</div>
+		    </div>
+			<br>
+
+			<br>
+			<br>
+			<br>
+			<var><var><var><var><var><var>
+			<var>
+				<br>
+				<br>
+				<br>
+
+				<br>
+
+				<br>
+				<br>
+				<br>
+				<var><var><var><var><var><var>
+				<var>
+					<br>
+					<br>
+					<br>
+
+
+
+					<br>
+
+				</var></var></var></var></var></var></var>
+				<br><br><br>
+				<br><br>
+
+			<br>
+			<br>
+			<br>
+			<var><var><var><var><var><var>
+			<var>
+				<br>
+				<br>
+				<br>
+
+
+
+				<br>
+
+			</var></var></var></var></var></var></var>
+			<br><br><br>
+			<br><br>
+
+			<br>
+			<br>
+			<br>
+			<var><var><var><var><var><var>
+			<var>
+				<br>
+				<br>
+				<br>
+
+
+
+				<br>
+
+			</var></var></var></var></var></var></var>
+			<br><br><br>
+			<br>
+
+				<br>
+
+			</var></var></var></var></var></var></var>
+			<br><br><br>
+			<br>
+			<script src="js/movv.js" type="text/javascript" charset="utf-8"></script>
+			<script type="text/javascript">
+				var itemzs=document.getElementsByClassName("itemz");
+				var prebtn=document.getElementsByClassName("pre")[0];
+				var nexbtn=document.getElementsByClassName("nex")[0];
+				var points=document.getElementsByClassName("point");
+
+				var index=0;
+				var allclear=function(){
+					for(var i=0;i<itemzs.length;i++){
+						itemzs[i].className="itemz"
+						points[i].className="point"
+					}
+				}
+				var goIndex=function(){
+
+					allclear();
+					itemzs[index].className="itemz active"
+					points[index].className="point active"
+				}
+				var gonex=function(){
+					if(index<4){
+						index++;
+					}else{
+						index=0;
+					}
+					goIndex();
+				}
+				var gopre=function(){
+					if(index==0){
+						index=4
+					}else{
+						index--;
+					}
+					goIndex();
+				}
+				nexbtn.addEventListener("click",function(){
+
+					gonex();
+				});
+				prebtn.addEventListener("click",function(){
+
+					gopre();
+				});
+				for(var i=0;i<points.length;i++){
+					points[i].addEventListener("mousemove",function(){
+						var getindex=this.getAttribute("data-index");
+						index=getindex;
+						goIndex();
+					})
+				}
+				setInterval(function(){
+					gonex();
+				},5000)
+
+			</script>
+	</body>
+</html>

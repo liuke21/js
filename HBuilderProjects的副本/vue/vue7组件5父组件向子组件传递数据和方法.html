@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="app">
+    <!-- 父组件通过子组件属性绑定的形式，把父组件的数据以属性绑定的形式传递给子组件 -->
+    <!-- 通过v-on的形式调用父组件的方法 -->
+    <com1 v-bind:parmsg="msg" @func="show"></com1>
+    </div>
+    <template id="temp1">
+      <div>
+      <h3>这是子组件{{parmsg}}</h3>
+      <input type="button" value="这是子组件调用父组件方法的按钮" @click="hand">
+    </div>
+    </template>
+  <script type="text/javascript">
+  var comp={
+    //把属性传递到template中
+    template:'#temp1',
+    //把父组件的数据先通过props数组将rmsg属性的数据传递进来，才能被使用
+    props:['parmsg'],
+    methods:{
+      hand(){
+        this.$emit('func')
+      }
+    }
+  }
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        msg:"啊这是父组件"
+      },
+      methods:{
+        show(){
+          console.log("调用了父组件中的方法")
+        }
+      },
+      components:{
+        com1:comp
+      }
+    })
+  </script>
+</body>
+</html>

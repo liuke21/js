@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="method">
+			<!-- v-if是删掉DOM内容，v-show是通过CSS样式改变display的属性 -->
+			<div v-show="show">
+				hello world
+			</div>
+			<button @click="button">xianshi</button>
+			<ul>
+				<!-- v-for是对数据进行循环展示 key提升每一项的渲染性能但是每一项item的值不能相同 -->
+				<li v-for="item of list" :key="item">
+					{{item}}
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:"#method",
+				data:{
+					show:true,
+					list:[1,2,3]
+				},
+				methods:{
+					button:function(){
+						this.show=!this.show;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

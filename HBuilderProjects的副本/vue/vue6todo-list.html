@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<!-- 通过点击按钮和v-show设置标签display属性，不进行dom的操作，
+			而v-if是删除dom,控制标签的出现
+		<p v-show="yes">{{msg}}</p>
+		<input type="button"value="消失" @click="show"> -->
+		<div>
+			<input type="text" v-model="value">
+			<input type="button" value="提交" @click="submit">
+			<ul>
+				<li v-for="(item,index) in list" :key="index">{{item}}</li>
+			</ul>
+		</div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el:"#app",
+				data:{
+					yes:true,
+					msg:"hahahaha",
+					value:"",
+					list:[]
+				},
+				methods:{
+					show(){
+						this.yes=!this.yes
+					},
+					submit(){
+						this.list.push(this.value)
+						this.value=""
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

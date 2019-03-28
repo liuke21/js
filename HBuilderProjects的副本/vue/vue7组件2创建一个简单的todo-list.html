@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="vue.js" charset="utf-8"></script>
+  <title>Document</title>
+  <style media="screen">
+    li{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <input type="text" v-model="value" @keyup.enter="submit">
+    <input type="button" value="提交" @click="submit">
+    <!-- 子组件创建delete事件，父组件正好能监听到该事件，并在父组件中执行 -->
+    <ul>
+        <todo-list v-for="(item,index) in list"
+        :key="index"
+        :content="item"
+        :index=index
+        @delet="Delet"
+        >
+        </todo-list>
+    </ul>
+  </div>
+  <script type="text/javascript">
+  //定义一个组件，其实每一个组件就是一个vue实例，欸一个vue实例也可以称为一个组件，也可以在组件里面定义它的methods等其它属性，
+    Vue.component('todo-list',{
+      //创建子组件时向子组件传递了item和index值，通过content和index接收传给子组件
+      props:['content','index'],
+      template:'<li @click="delet">{{content}}</li>',
+      methods:{
+        delet(){
+          //因为item在父组件的数据中，要想通过子组件删除item需要与父组件通信让父组件删除数据
+          //通过向父组件传递delet事件删除对应的数据（父组件list第this.index个值）
+          this.$emit('delet',this.index)
+        }
+      }
+    })
+    var vm = new Vue({
+      el:"#app",
+      data:{
+        value:"",
+        list:[]
+      },
+      methods:{
+        submit(){
+          if(this.value==""){
+            alert("内容为空，请重新输入")
+            return false;
+          }
+          this.list.push(this.value)
+          this.value=""
+        },
+        //父组件执行delete事件
+        Delet(index){
+          this.list.splice(index,1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

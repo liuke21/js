@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="vue.js" charset="utf-8"></script>
+  <style media="screen">
+    input{
+      width: 200px;
+      display: inline-block;
+      margin-bottom: 20px;
+      margin-left: 30px;
+    }
+    tr,th,td{
+      height: 60px;
+      background-color: #f8f8f8;
+      transition: all .3s;
+    }
+    th,td:hover{
+      background-color: #fff5ee;
+    }
+    th,td{
+      width:300px;
+      border:1px solid #eee;
+      padding:0;
+    }
+    table{
+      border-collapse:collapse;
+    }
+    a{
+      display:inline-block;
+      margin-left: 81px;
+      width:48px;
+      text-decoration:none;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    Id:<input type="text" v-model="id">
+    Name:<input type="text" v-model="name" @keyup.enter="submit">
+    <input type="button" @click="submit" value="提交">
+    <!-- vue中所有指令被调用时都以v-开头 -->
+    搜索关键字:<input type="text" v-model="keywords" id="search" v-focus v-color="'blue'">
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Ctime</th>
+          <th>Opreation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 定义一个search方法往list里面传递参数keywords，生成新的数组 -->
+        <tr v-for="(item,index) in search(keywords)" :key="index">
+          <td>{{item.id+"、"}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.ctime | dateFormat}}</td>
+          <td><a href="#"  @click.prevent="delet(item.id)">删除</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="app2" v-color="'pink'" v-fontweight=500 v-fontsize="'50px'">{{dt | dateFormate}}</div>
+</body>
+<script type="text/javascript">
+  //使用vue.directive()定义全局指令
+  //第一个参数时方法名第二个是一个对象，在调用的时候执行相关的操作
+  Vue.directive('focus',{
+    bind:function(el){//每当指令绑定到元素上的时候，就执行bind函数，只能执行一次
+      //第一个参数必须是el,el表示被绑定指令的那个元素
+      //刚绑定了指令还没有插入到dom中，focus还没有起作用，因为一个元素没有插入到dom中，focus不起作用
+      el.focus()
+    },
+    inserted:function(el){
+      //inserted函数表示插入到dom中时，执行该指令，只执行一次
+      el.focus()
+    },
+    updated:function(el){
+      //vNode更新时，执行该函数，可能执行多次
+    }
+  })
+  //自定义全局指令改变元素的颜色
+  Vue.directive('color',{
+    bind:function(el,binding){//binding返回的是一个对象里面包含value属性binding.value就是color值
+      console.log(binding)
+      el.style.color=binding.value
+    }
+  })
+//全局过滤器进行时间的格式化
+Vue.filter('dateFormat',function(datestr){
+  //根据给定的时间字符串，得到特定的时间
+  var dt = new Date(datestr)
+  //yyyy-mm-dd
+  var y=dt.getFullYear()
+  //padStart字符串修饰，修改为两位数，如果不够两位数前面自动填充为0
+  //datestr可以记录最原始的时间，没有datestr只会更新最新的时间
+  var m=(dt.getMonth()+1).toString().padStart(2,'0')
+  var d=dt.getDate().toString().padStart(2,'0')
+  var h=dt.getHours().toString().padStart(2,'0')
+  var mi=dt.getMinutes().toString().padStart(2,'0')
+  var s=dt.getSeconds().toString().padStart(2,'0')
+  return y+"-"+m+"-"+d+"-"+h+":"+mi+":"+s
+
+})
+  var vm = new Vue({
+    el:"#app",
+    data:{
+      id:"",
+      name:"",
+      keywords:"",
+      list:[
+        {id:'1',name:'奔驰',ctime:new Date()},
+        {id:'2',name:'宝马',ctime:new Date()}
+      ]
+    },
+    methods:{
+      submit(){
+        if(this.id=="" | this.name==""){
+          alert("id或name为空")
+          return false;
+        }
+        this.list.push({id:this.id,name:this.name,ctime:new Date()})
+        this.id=""
+        this.name=""
+      },
+      delet(id){
+      //  第一种方法：
+      //通过some循环，循环的id等于我们传递的id是删除该组数据
+      //   this.list.some((item,i)=>{
+      //     if(item.id==id){
+      //       this.list.splice(i,1)
+      //       //在some循环中只要return返会true就会终止数组的循环
+      //       return true;
+      //     }
+      //   })
+      // }
+
+      //第二种方法：
+      //findindex查找索引，index就是item的索引值，即下标值
+      //删除一项后每个item的下标就会变化，只要通过id找到对应的index，删除第index项就可以删除item
+          var index = this.list.findIndex(item=>{
+            if(item.id==id){
+              return true;
+            }
+          })
+
+          this.list.splice(index,1)
+    },
+    //定义search 方法，传递对应的值，通过过滤器的方法，过滤掉不符合的item，如果item的名字包括keywords就返回一个新的数组
+    search(keywords){
+      return NewList=this.list.filter(item=>{
+        if(item.name.includes(keywords)){
+          return item;
+        }
+      })
+    }
+  }
+})
+  var vm2 = new Vue({
+    el:"#app2",
+    data:{
+      dt:new Date()
+    },
+    filters:{
+      //定义私有过滤器，有两个条件：过滤器名称和过滤函数
+      //如果全局过滤器和私有过滤器名称一样的话根据就近原则选择私有过滤器进行过滤
+      'dateFormate':function(datestr){
+        var dt = new Date(datestr)
+        //yyyy-mm-dd
+        var y=dt.getFullYear()
+        var m=dt.getMonth()+1
+        var d=dt.getDate()
+        var h=dt.getHours()
+        var mi=dt.getMinutes()
+        var s=dt.getSeconds()
+        return y+"-"+m+"-"+d+"-"+h+":"+mi+":"+s+"----"
+      }
+    },
+    //定义私有指令
+    directives:{
+      'fontsize':{
+        bind:function(el,binding){
+          el.style.fontSize=binding.value
+        }
+      },
+      //下面是私有指令的简写方式：
+      'fontweight':function(el,binding){
+       el.style.fontWeight=binding.value
+     }
+  }
+})
+  //为search添加focus方法
+  // document.getElementById("search").focus()
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script> -->
+	</head>
+	<body>
+		<!-- 挂载点、实例、模板 -->
+		<div id="root"></div>
+		<!-- //要控制的vue区域，在MVVM中代表v -->
+		<script>
+			//vue实例，通过vue提供的指令，只需要把数据渲染到指定的位置，不再手动操作DOM元素
+			//我们new出来的vue对象，就是MVVM中的view调度者，提供数据的绑定，data就是MVVM中的M,专门保存页面中的数据
+			new Vue({
+				el:"#root",//通过类选择器选择要控制的区域
+				template:'<h1>hello {{msg}}</h1>',
+				data:{//存放el中要用到的数据
+					msg:"liuke"
+				}
+			})
+		</script>
+	</body>
+</html>
